@@ -99,7 +99,7 @@ pen2pixel/
 ## Clone Repository
 
 ```bash
-git clone [<repository-url>](https://github.com/Likith-java/Pen2Pixel.git)
+git clone [https://github.com/Likith-java/Pen2Pixel.git]]
 cd pen2pixel
 ```
 
