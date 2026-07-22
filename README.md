@@ -1,81 +1,253 @@
 # Pen2Pixel — Handwriting Prediction Using Machine Learning
 
-A web application that recognizes handwritten characters and words from images using deep learning. Built with a CNN-BiLSTM-CTC architecture.
+A web application that recognizes handwritten characters, words, and handwritten documents from images using deep learning. Built with a **CNN-BiLSTM-CTC architecture**, featuring a **React frontend** and a **Node.js + Express backend**.
+
+---
 
 ## Overview
 
-Pen2Pixel converts handwritten text in images into editable digital text. The system uses image preprocessing (grayscale, thresholding, denoising, normalization) followed by deep learning models — a CNN for character/digit classification and a CNN-BiLSTM-CTC for word recognition.
+**Pen2Pixel** converts handwritten text in images into editable digital text. Users can upload an image of handwritten notes, and the application processes it through an image preprocessing pipeline (grayscale conversion, thresholding, denoising, normalization, and segmentation) before passing it to a deep learning model for text recognition.
 
-## Project Structure
+The project uses:
 
-```
-handwriting-recognition/
-├── dataset/                 # Raw + processed MNIST/IAM
+* **CNN** for feature extraction
+* **BiLSTM** for sequence modeling
+* **CTC Loss** for handwritten text transcription
+* **React** for the frontend
+* **Node.js + Express** for the backend API
+* **Python (TensorFlow/PyTorch)** for machine learning and inference
+
+---
+
+# Project Structure
+
+```text
+pen2pixel/
+├── dataset/                  # Raw and processed datasets
 │   ├── mnist/
-│   └── iam/
-├── preprocessing/           # Preprocessing, segmentation, augmentation
+│   ├── iam/
+│   └── emnist/
+│
+├── preprocessing/            # Image preprocessing
 │   ├── preprocess.py
 │   ├── segmentation.py
 │   └── augment.py
-├── models/                  # Model architectures + saved weights
+│
+├── models/                   # Deep Learning models
 │   ├── cnn_model.py
 │   ├── crnn_ctc_model.py
 │   └── saved/
-├── backend/                 # FastAPI app + inference
-│   ├── app.py
-│   └── inference.py
-├── frontend/                # Web UI (HTML/CSS/JS)
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-├── api/                     # API route definitions
-│   └── routes.py
-├── utils/                   # Metrics (CER, WER), helpers
-│   └── metrics.py
-├── notebooks/               # Experimentation (both)
+│
+├── backend/                  # Node.js + Express backend
+│   ├── server.js
+│   ├── routes/
+│   ├── controllers/
+│   ├── middleware/
+│   └── package.json
+│
+├── frontend/                 # React application
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   └── package.json
+│
+├── api/                      # Python inference APIs
+│
+├── utils/
+│   ├── metrics.py
+│   └── helpers.py
+│
+├── notebooks/
+│
 ├── requirements.txt
 └── README.md
 ```
 
-## Quick Start
+---
 
-### 1. Setup
+# Tech Stack
+
+### Frontend
+
+* React
+* JavaScript
+* Axios
+* CSS / Tailwind CSS (optional)
+
+### Backend
+
+* Node.js
+* Express.js
+* Multer (image uploads)
+
+### Machine Learning
+
+* Python
+* TensorFlow / PyTorch
+* OpenCV
+* NumPy
+* Pandas
+
+---
+
+# Quick Start
+
+## Clone Repository
 
 ```bash
-cd handwriting-recognition
-python -m venv venv
-source venv/bin/activate   # or venv\Scripts\activate on Windows
+git clone <repository-url>
+cd pen2pixel
+```
+
+---
+
+## Install Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+## Install Backend
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+---
+
+## Install Python Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Download Datasets
+---
 
-- **MNIST**: Automatically downloaded via `torchvision` or `tensorflow.keras.datasets`
-- **IAM Handwriting Database**: Requires free registration at [fki.tic.heia-fr.ch/databases/iam-handwriting-database](http://www.fki.tic.heia-fr.ch/databases/iam-handwriting-database). Place files in `dataset/iam/`
+# Download Datasets
 
-### 3. Train Models
+### MNIST
+
+Automatically downloaded using
+
+```python
+torchvision.datasets
+```
+
+or
+
+```python
+tensorflow.keras.datasets
+```
+
+---
+
+### IAM Handwriting Database
+
+Register for free and download the dataset.
+
+Store it inside
+
+```text
+dataset/iam/
+```
+
+---
+
+### Optional
+
+* EMNIST
+* CVL Handwriting Database
+
+---
+
+# Train Models
+
+### CNN
 
 ```bash
-# Train CNN on MNIST
 python models/cnn_model.py
+```
 
-# Train CNN-BiLSTM-CTC on IAM
+---
+
+### CNN-BiLSTM-CTC
+
+```bash
 python models/crnn_ctc_model.py
 ```
 
-## Datasets
+---
 
-| Dataset | Use | Notes |
-|---------|-----|-------|
-| MNIST | Digit classification | 70k images, clean, fast to train |
-| IAM Handwriting DB | Word/line recognition | Requires free registration; writer-independent split |
-| EMNIST (optional) | Letter classification | Same format as MNIST, easy drop-in |
+# Datasets
 
-## Model Architecture
+| Dataset                  | Purpose                 | Description                    |
+| ------------------------ | ----------------------- | ------------------------------ |
+| MNIST                    | Digit Recognition       | 70,000 handwritten digits      |
+| EMNIST                   | Character Recognition   | Handwritten letters and digits |
+| IAM Handwriting Database | Word & Line Recognition | Real handwritten English text  |
+| CVL (Optional)           | Generalization Testing  | Multiple handwriting styles    |
 
-- **CNN**: Convolutional layers for feature extraction → fully connected layers → character class probabilities
-- **CNN-BiLSTM-CTC**: CNN backbone → Bidirectional LSTM sequence modeling → CTC loss for transcription
+---
 
-## License
+# Model Architecture
 
-MIT
+## CNN
+
+* Image Input
+* Convolution Layers
+* ReLU
+* Max Pooling
+* Fully Connected Layers
+* Softmax Output
+
+---
+
+## CNN-BiLSTM-CTC
+
+* Image Input
+* CNN Feature Extractor
+* Feature Map Sequence
+* Bidirectional LSTM
+* Dense Layer
+* CTC Loss
+* Predicted Text
+
+---
+
+# Features
+
+* Upload handwritten images
+* Image preprocessing
+* Automatic handwritten text recognition
+* Real-time prediction
+* Editable text output
+* Copy recognized text
+* Download extracted text
+* Responsive React interface
+
+---
+
+# Future Enhancements
+
+* Multi-language handwriting recognition
+* PDF support
+* Paragraph-level recognition
+* Mobile application
+* Cloud deployment
+* Fine-tuning using custom datasets
+
+---
+
+# License
+
+MIT License
