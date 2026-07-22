@@ -63,14 +63,6 @@ python models/cnn_model.py
 python models/crnn_ctc_model.py
 ```
 
-### 4. Run the App
-
-```bash
-uvicorn backend.app:app --reload
-```
-
-Open `http://localhost:8000` in your browser, or navigate to the frontend at `frontend/index.html`.
-
 ## Datasets
 
 | Dataset | Use | Notes |
@@ -83,11 +75,6 @@ Open `http://localhost:8000` in your browser, or navigate to the frontend at `fr
 
 - **CNN**: Convolutional layers for feature extraction → fully connected layers → character class probabilities
 - **CNN-BiLSTM-CTC**: CNN backbone → Bidirectional LSTM sequence modeling → CTC loss for transcription
-
-## Team
-
-- **Person A** — ML & Backend Lead (model architecture, training, backend API)
-- **Person B** — Data/CV & Frontend Lead (preprocessing, dataset pipeline, frontend UI)
 
 ## License
 
