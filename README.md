@@ -22,42 +22,31 @@ The project uses:
 # Project Structure
 
 ```text
-handwriting-recognition/
+pen2pixel/
+├── api/                      # Python inference API
+│   └── routes.py
+├── backend/                  # Python backend (FastAPI)
+│   ├── app.py
+│   └── inference.py
 ├── dataset/                  # Raw and processed datasets
-│   ├── mnist/                # MNIST digits
-│   ├── emnist/               # EMNIST characters
-│   ├── iam/                  # IAM Handwriting Database
-│   └── download_emnist.py    # EMNIST download script
-│
-├── preprocessing/            # Image preprocessing
-│   ├── preprocess.py
-│   ├── segmentation.py
-│   └── augment.py
-│
+│   ├── download_emnist.py
+│   ├── mnist/
+│   └── iam/
 ├── models/                   # Deep Learning models
 │   ├── cnn_model.py
 │   ├── crnn_ctc_model.py
-│   └── saved/                # Trained model weights
-│
-├── backend/                  # FastAPI backend
-│   ├── app.py
-│   └── inference.py
-│
-├── frontend/                 # Web UI
+│   └── saved/
+├── preprocessing/            # Image preprocessing
+│   ├── preprocess.py
+│   └── augment.py
+├── utils/                    # Shared utilities
+│   └── metrics.py
+├── frontend/                 # Web UI (HTML/CSS/JS)
 │   ├── index.html
 │   ├── style.css
 │   └── script.js
-│
-├── api/                      # Python inference API routes
-│   └── routes.py
-│
-├── utils/                    # Metrics and helpers
-│   └── metrics.py
-│
-├── notebooks/                # Experimentation notebooks
-│
+├── notebooks/                # Experimentation
 ├── uploads/                  # Uploaded images
-│
 ├── requirements.txt
 └── README.md
 ```
@@ -94,8 +83,8 @@ handwriting-recognition/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/Likith-java/Pen2Pixel.git
-cd Pen2Pixel/handwriting-recognition
+git clone [https://github.com/Likith-java/Pen2Pixel.git]]
+cd pen2pixel
 ```
 
 ---
@@ -104,7 +93,18 @@ cd Pen2Pixel/handwriting-recognition
 
 ```bash
 cd frontend
-# Open index.html in browser or serve with live-server
+npm install
+npm run dev
+```
+
+---
+
+## Install Backend
+
+```bash
+cd backend
+npm install
+npm start
 ```
 
 ---
@@ -121,62 +121,47 @@ pip install -r requirements.txt
 
 ### MNIST
 
-Automatically downloaded using
-
-```python
-torchvision.datasets
-```
-
-or
-
-```python
-tensorflow.keras.datasets
-```
-
----
-
-### IAM Handwriting Database
-
-Register for free and download the dataset.
-
-Store it inside
+Download from [Kaggle MNIST Dataset](https://www.kaggle.com/datasets/hojjatk/mnist-dataset) and place the IDX files inside:
 
 ```text
-handwriting-recognition/dataset/iam/
+dataset/mnist/
 ```
+
+Expected files: `train-images-idx3-ubyte`, `train-labels-idx1-ubyte`, `t10k-images-idx3-ubyte`, `t10k-labels-idx1-ubyte`
 
 ---
 
 ### EMNIST
 
+Automatically downloaded using the provided script:
+
 ```bash
 python dataset/download_emnist.py
 ```
 
+Downloads via `torchvision.datasets.EMNIST` and saves numpy arrays to `dataset/emnist/`
+
 ---
 
-### Optional
+### IAM Handwriting Database (optional)
 
-* EMNIST
-* CVL Handwriting Database
+Register for free and download. Store it inside:
+
+```text
+dataset/iam/
+```
 
 ---
 
 # Train Models
-
-Make sure you're in the `handwriting-recognition/` directory and the virtual environment is activated:
-
-```bash
-cd handwriting-recognition
-venv\Scripts\activate      # Windows
-# source venv/bin/activate  # macOS/Linux
-```
 
 ### CNN
 
 ```bash
 python models/cnn_model.py
 ```
+
+---
 
 ### CNN-BiLSTM-CTC
 
