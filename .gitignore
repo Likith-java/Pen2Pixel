@@ -31,18 +31,19 @@ Thumbs.db
 .DS_Store
 
 # Datasets (large, downloaded separately)
-dataset/mnist/
-dataset/iam/
+handwriting-recognition/dataset/mnist/
+handwriting-recognition/dataset/iam/
+handwriting-recognition/dataset/emnist/raw/
 
 # Trained models
-models/saved/
+handwriting-recognition/models/saved/
 
 # Notebooks output
-notebooks/.ipynb_checkpoints/
+handwriting-recognition/notebooks/.ipynb_checkpoints/
 
 # Jupyter
 .ipynb_checkpoints/
 
 # Uploads
-uploads/*
-!uploads/.gitkeep
+handwriting-recognition/uploads/*
+!handwriting-recognition/uploads/.gitkeep

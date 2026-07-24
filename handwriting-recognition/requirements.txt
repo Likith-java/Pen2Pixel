@@ -1,0 +1,12 @@
+torch
+torchvision
+torchaudio
+tensorflow-datasets
+opencv-python
+numpy
+pandas
+matplotlib
+jupyter
+fastapi
+uvicorn
+Pillow
