@@ -22,11 +22,12 @@ The project uses:
 # Project Structure
 
 ```text
-pen2pixel/
+handwriting-recognition/
 ├── dataset/                  # Raw and processed datasets
-│   ├── mnist/
-│   ├── iam/
-│   └── emnist/
+│   ├── mnist/                # MNIST digits
+│   ├── emnist/               # EMNIST characters
+│   ├── iam/                  # IAM Handwriting Database
+│   └── download_emnist.py    # EMNIST download script
 │
 ├── preprocessing/            # Image preprocessing
 │   ├── preprocess.py
@@ -36,32 +37,26 @@ pen2pixel/
 ├── models/                   # Deep Learning models
 │   ├── cnn_model.py
 │   ├── crnn_ctc_model.py
-│   └── saved/
+│   └── saved/                # Trained model weights
 │
-├── backend/                  # Node.js + Express backend
-│   ├── server.js
-│   ├── routes/
-│   ├── controllers/
-│   ├── middleware/
-│   └── package.json
+├── backend/                  # FastAPI backend
+│   ├── app.py
+│   └── inference.py
 │
-├── frontend/                 # React application
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   └── package.json
+├── frontend/                 # Web UI
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 │
-├── api/                      # Python inference APIs
+├── api/                      # Python inference API routes
+│   └── routes.py
 │
-├── utils/
-│   ├── metrics.py
-│   └── helpers.py
+├── utils/                    # Metrics and helpers
+│   └── metrics.py
 │
-├── notebooks/
+├── notebooks/                # Experimentation notebooks
+│
+├── uploads/                  # Uploaded images
 │
 ├── requirements.txt
 └── README.md
@@ -99,8 +94,8 @@ pen2pixel/
 ## Clone Repository
 
 ```bash
-git clone [https://github.com/Likith-java/Pen2Pixel.git]]
-cd pen2pixel
+git clone https://github.com/Likith-java/Pen2Pixel.git
+cd Pen2Pixel/handwriting-recognition
 ```
 
 ---
@@ -109,18 +104,7 @@ cd pen2pixel
 
 ```bash
 cd frontend
-npm install
-npm run dev
-```
-
----
-
-## Install Backend
-
-```bash
-cd backend
-npm install
-npm start
+# Open index.html in browser or serve with live-server
 ```
 
 ---
@@ -158,7 +142,15 @@ Register for free and download the dataset.
 Store it inside
 
 ```text
-dataset/iam/
+handwriting-recognition/dataset/iam/
+```
+
+---
+
+### EMNIST
+
+```bash
+python dataset/download_emnist.py
 ```
 
 ---
@@ -172,13 +164,19 @@ dataset/iam/
 
 # Train Models
 
+Make sure you're in the `handwriting-recognition/` directory and the virtual environment is activated:
+
+```bash
+cd handwriting-recognition
+venv\Scripts\activate      # Windows
+# source venv/bin/activate  # macOS/Linux
+```
+
 ### CNN
 
 ```bash
 python models/cnn_model.py
 ```
-
----
 
 ### CNN-BiLSTM-CTC
 
