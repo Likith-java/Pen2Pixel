@@ -1,0 +1,9 @@
+# Pen2Pixel optional dependencies — NOT installed by default.
+# Install only when the corresponding approved milestone needs them.
+#   torchvision: required only by the optional EMNIST downloader (EMNIST is optional per architecture D-07).
+#   pandas / matplotlib: offline data analysis and experiment reports.
+#   scikit-learn: deferred; baseline metrics are implemented directly without it.
+torchvision==0.29.2
+pandas==3.0.3
+matplotlib==3.11.2
+scikit-learn==1.8.0

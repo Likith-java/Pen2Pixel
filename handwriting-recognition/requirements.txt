@@ -1,12 +1,12 @@
-torch
-torchvision
-torchaudio
-tensorflow-datasets
-opencv-python
-numpy
-pandas
-matplotlib
-jupyter
-fastapi
-uvicorn
-Pillow
+# Pen2Pixel runtime dependencies (pinned, Python 3.13 / Windows verified)
+# Install: .venv\Scripts\python.exe -m pip install -r handwriting-recognition/requirements.txt
+torch==2.15.0
+numpy==2.3.3
+Pillow==13.0.0
+opencv-python-headless==5.1.0.95
+PyYAML==6.0.3
+fastapi==0.156.8
+uvicorn==0.54.0
+python-multipart==0.0.22
+pydantic==2.12.5
+tqdm==4.67.3

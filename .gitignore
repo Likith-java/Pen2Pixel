@@ -34,6 +34,7 @@ Thumbs.db
 handwriting-recognition/dataset/mnist/
 handwriting-recognition/dataset/iam/
 handwriting-recognition/dataset/emnist/raw/
+handwriting-recognition/dataset/emnist/*.npz
 
 # Trained models
 handwriting-recognition/models/saved/
@@ -43,6 +44,23 @@ handwriting-recognition/notebooks/.ipynb_checkpoints/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Test and tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Generated outputs and logs
+handwriting-recognition/outputs/
+*.log
+
+# Local configuration overrides (never commit machine-specific values)
+configs/*.local.yaml
+configs/*.local.yml
 
 # Uploads
 handwriting-recognition/uploads/*

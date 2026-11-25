@@ -1,0 +1,19 @@
+[project]
+name = "pen2pixel"
+version = "0.1.0"
+description = "Handwritten text-line recognition web application"
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["handwriting-recognition/tests"]
+pythonpath = ["handwriting-recognition"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

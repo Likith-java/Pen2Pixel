@@ -1,0 +1,5 @@
+# Pen2Pixel development / test dependencies (pinned)
+# Install after requirements.txt:
+#   .venv\Scripts\python.exe -m pip install -r handwriting-recognition/requirements-dev.txt
+pytest==9.1.1
+httpx==0.28.1
